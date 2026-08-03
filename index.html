@@ -189,7 +189,6 @@ const $=s=>document.querySelector(s);
 const F=DATA.ntas.features;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 
-/* Dutch-map palette */
 const HVI =['#3a9b9b','#e8dcc0','#d4a0b8','#e8935a','#9e3b52'];
 const CAN =['#e8dcc0','#a9d4c4','#5fc8b8','#3a9b9b','#2e8b8b'];
 const WAIT=['#2c4a7c','#5a8db8','#e8dcc0','#e8935a','#9e3b52'];
@@ -210,7 +209,7 @@ const LENS={
     note:'Minutes to the nearest subway. Far out, trips fall to slower buses — and <b>waiting means standing exposed</b>.'}
 };
 let lens='off';
-const overlays={flood:false,green:false,lines:false,stations:false,bus:false,w5:false,w25:false};
+const overlays={flood:false,green:false,lines:true,stations:true,bus:true,w5:false,w25:false};
 
 /* aggregates */
 function agg(b){const s=F.filter(f=>f.properties.boro===b).map(f=>f.properties);const m=k=>s.reduce((a,p)=>a+p[k],0)/s.length;
