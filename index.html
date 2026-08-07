@@ -193,11 +193,12 @@ h1{font-family:var(--serif);font-weight:500;font-size:27px;line-height:1.1;margi
     <button class="railtoggle" id="railtoggle">☰ About &amp; lens</button>
     <div id="map"></div>
     <div class="layer-ribbon" id="layerRibbon"></div>
-    <div class="mr-row"><span class="mr-label">Subway</span><span class="mr-lane"><span class="mr-dot" id="mrDotSubway"></span></span><span class="mr-val" id="mrValSubway"></span></div>
-<div class="mr-row"><span class="mr-label">Bus · peak</span><span class="mr-lane"><span class="mr-dot" id="mrDotBusPeak"></span></span><span class="mr-val" id="mrValBusPeak"></span></div>
-<div class="mr-row"><span class="mr-label">Bus · night</span><span class="mr-lane"><span class="mr-dot" id="mrDotBusNight"></span></span><span class="mr-val" id="mrValBusNight"></span></div>
-<div class="mr-foot">real avg mph · bus: this app's MTA segment data, split 7am–7pm vs. 8pm–6am · subway: MTA system avg (speed doesn't vary with road traffic)</div>
-
+    <div class="mode-race" id="modeRace">
+      <div class="mr-title">Typical transit speed</div>
+      <div class="mr-row"><span class="mr-label">Subway</span><span class="mr-lane"><span class="mr-dot" id="mrDotSubway"></span></span><span class="mr-val" id="mrValSubway"></span></div>
+      <div class="mr-row"><span class="mr-label">Bus · peak</span><span class="mr-lane"><span class="mr-dot" id="mrDotBusPeak"></span></span><span class="mr-val" id="mrValBusPeak"></span></div>
+      <div class="mr-row"><span class="mr-label">Bus · night</span><span class="mr-lane"><span class="mr-dot" id="mrDotBusNight"></span></span><span class="mr-val" id="mrValBusNight"></span></div>
+      <div class="mr-foot">real avg mph · bus: this app's MTA segment data, split 7am–7pm vs. 8pm–6am · subway: MTA system avg (speed doesn't vary with road traffic)</div>
     </div>
     <div class="readout" id="readout"></div>
     <div class="legendbox" id="legendbox">
@@ -654,8 +655,10 @@ function speedColorFor(mph){
   return d3.interpolateRgb(WAIT[i0],WAIT[i1])(idx-i0);
 }
 
-/* mode-speed comparison — real citywide averages: bus from this app's own MTA Bus Route
-   Segment Speeds data; subway from MTA's published system-wide average */
+/* mode-speed comparison — real citywide averages: bus split peak (7am-7pm) vs. overnight
+   (8pm-6am) from this app's own MTA Bus Route Segment Speeds data (road congestion varies
+   by hour); subway from MTA's published system-wide average (doesn't vary with road traffic,
+   so shown as a single figure) */
 const MODE_SPEEDS={subway:17.4,busPeak:8.9,busNight:10.4};
 const MODE_MIN=6,MODE_MAX=20;
 function modeColorFor(mph){
